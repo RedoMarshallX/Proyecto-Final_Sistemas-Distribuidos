@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package distributed_system;
+
+// ========================================
+// Servicio 1: Operaciones Matemáticas
+// ========================================
+service MathService {
+  rpc Add(MathRequest) returns (MathResponse);
+  rpc Subtract(MathRequest) returns (MathResponse);
+  rpc Multiply(MathRequest) returns (MathResponse);
+  rpc Divide(MathRequest) returns (MathResponse);
+}
+
+message MathRequest {
+  string sender_id = 1;
+  double num1 = 2;
+  double num2 = 3;
+  int32 timestamp = 4;
+}
+
+message MathResponse {
+  double result = 1;
+  int32 timestamp = 2;
+  string status = 3;
+}
+
+// ========================================
+// Servicio 2: Promedio de números
+// ========================================
+service AverageService {
+  rpc CalculateAverage(AverageRequest) returns (AverageResponse);
+}
+
+message AverageRequest {
+  string sender_id = 1;
+  int32 timestamp = 2;
+}
+
+message AverageResponse {
+  repeated double numbers = 1;
+  double average = 2;
+  int32 timestamp = 3;
+}
+
+// ========================================
+// Servicio 3: Multiplicación de matrices
+// ========================================
+service MatrixService {
+  rpc MultiplyMatrices(MatrixRequest) returns (MatrixResponse);
+}
+
+message Matrix2x2 {
+  repeated double values = 1; // 4 valores: [0,0], [0,1], [1,0], [1,1]
+}
+
+message MatrixRequest {
+  string sender_id = 1;
+  int32 timestamp = 2;
+}
+
+message MatrixResponse {
+  Matrix2x2 matrix_a = 1;
+  Matrix2x2 matrix_b = 2;
+  Matrix2x2 result = 3;
+  int32 timestamp = 4;
+}
+
+// ========================================
+// Servicio 4: Envío de mensajes (Lamport)
+// ========================================
+service MessageService {
+  rpc SendMessage(MessageRequest) returns (MessageResponse);
+}
+
+message MessageRequest {
+  string sender_id = 1;
+  string receiver_id = 2;
+  string message = 3;
+  int32 timestamp = 4;
+}
+
+message MessageResponse {
+  string status = 1;
+  int32 timestamp = 2;
+}
+
+// ========================================
+// Servicio 5: Broadcast (difusión)
+// ========================================
+service BroadcastService {
+  rpc BroadcastMessage(BroadcastRequest) returns (BroadcastResponse);
+}
+
+message BroadcastRequest {
+  string sender_id = 1;
+  string message = 2;
+  int32 timestamp = 3;
+}
+
+message BroadcastResponse {
+  string status = 1;
+  repeated string delivered_to = 2;
+  int32 timestamp = 3;
+}
