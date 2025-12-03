@@ -5,7 +5,7 @@ import warnings
 
 import services_pb2 as services__pb2
 
-GRPC_GENERATED_VERSION = '1.76.0'
+GRPC_GENERATED_VERSION = '1.75.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + ' but the generated code in services_pb2_grpc.py depends on'
+        + f' but the generated code in services_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -397,9 +397,171 @@ class MatrixService(object):
             _registered_method=True)
 
 
+class SortServiceStub(object):
+    """========================================
+    Servicio 4: Quick Sort
+    ========================================
+    """
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.QuickSort = channel.unary_unary(
+                '/distributed_system.SortService/QuickSort',
+                request_serializer=services__pb2.SortRequest.SerializeToString,
+                response_deserializer=services__pb2.SortResponse.FromString,
+                _registered_method=True)
+
+
+class SortServiceServicer(object):
+    """========================================
+    Servicio 4: Quick Sort
+    ========================================
+    """
+
+    def QuickSort(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_SortServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'QuickSort': grpc.unary_unary_rpc_method_handler(
+                    servicer.QuickSort,
+                    request_deserializer=services__pb2.SortRequest.FromString,
+                    response_serializer=services__pb2.SortResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'distributed_system.SortService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('distributed_system.SortService', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class SortService(object):
+    """========================================
+    Servicio 4: Quick Sort
+    ========================================
+    """
+
+    @staticmethod
+    def QuickSort(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/distributed_system.SortService/QuickSort',
+            services__pb2.SortRequest.SerializeToString,
+            services__pb2.SortResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+
+class SearchServiceStub(object):
+    """========================================
+    Servicio 5: Búsqueda Lineal
+    ========================================
+    """
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.LinearSearch = channel.unary_unary(
+                '/distributed_system.SearchService/LinearSearch',
+                request_serializer=services__pb2.SearchRequest.SerializeToString,
+                response_deserializer=services__pb2.SearchResponse.FromString,
+                _registered_method=True)
+
+
+class SearchServiceServicer(object):
+    """========================================
+    Servicio 5: Búsqueda Lineal
+    ========================================
+    """
+
+    def LinearSearch(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_SearchServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'LinearSearch': grpc.unary_unary_rpc_method_handler(
+                    servicer.LinearSearch,
+                    request_deserializer=services__pb2.SearchRequest.FromString,
+                    response_serializer=services__pb2.SearchResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'distributed_system.SearchService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('distributed_system.SearchService', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class SearchService(object):
+    """========================================
+    Servicio 5: Búsqueda Lineal
+    ========================================
+    """
+
+    @staticmethod
+    def LinearSearch(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/distributed_system.SearchService/LinearSearch',
+            services__pb2.SearchRequest.SerializeToString,
+            services__pb2.SearchResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+
 class MessageServiceStub(object):
     """========================================
-    Servicio 4: Envío de mensajes (Lamport)
+    Servicio 6: Envío de mensajes (Lamport)
     ========================================
     """
 
@@ -418,7 +580,7 @@ class MessageServiceStub(object):
 
 class MessageServiceServicer(object):
     """========================================
-    Servicio 4: Envío de mensajes (Lamport)
+    Servicio 6: Envío de mensajes (Lamport)
     ========================================
     """
 
@@ -446,7 +608,7 @@ def add_MessageServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class MessageService(object):
     """========================================
-    Servicio 4: Envío de mensajes (Lamport)
+    Servicio 6: Envío de mensajes (Lamport)
     ========================================
     """
 
@@ -480,7 +642,7 @@ class MessageService(object):
 
 class BroadcastServiceStub(object):
     """========================================
-    Servicio 5: Broadcast (difusión)
+    Servicio 7: Broadcast (difusión)
     ========================================
     """
 
@@ -499,7 +661,7 @@ class BroadcastServiceStub(object):
 
 class BroadcastServiceServicer(object):
     """========================================
-    Servicio 5: Broadcast (difusión)
+    Servicio 7: Broadcast (difusión)
     ========================================
     """
 
@@ -527,7 +689,7 @@ def add_BroadcastServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class BroadcastService(object):
     """========================================
-    Servicio 5: Broadcast (difusión)
+    Servicio 7: Broadcast (difusión)
     ========================================
     """
 

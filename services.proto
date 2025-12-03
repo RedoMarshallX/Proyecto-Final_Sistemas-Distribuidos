@@ -67,7 +67,49 @@ message MatrixResponse {
 }
 
 // ========================================
-// Servicio 4: Envío de mensajes (Lamport)
+// Servicio 4: Quick Sort
+// ========================================
+service SortService {
+  rpc QuickSort(SortRequest) returns (SortResponse);
+}
+
+message SortRequest {
+  string sender_id = 1;
+  int32 timestamp = 2;
+}
+
+message SortResponse {
+  repeated int32 original_numbers = 1;
+  repeated int32 sorted_numbers = 2;
+  int32 timestamp = 3;
+}
+
+// ========================================
+// Servicio 5: Búsqueda Lineal
+// ========================================
+service SearchService {
+  rpc LinearSearch(SearchRequest) returns (SearchResponse);
+}
+
+message SearchRequest {
+  string sender_id = 1;
+  int32 timestamp = 2;
+}
+
+message SearchResult {
+  int32 value = 1;
+  int32 position = 2;
+  bool found = 3;
+}
+
+message SearchResponse {
+  repeated int32 numbers = 1;
+  repeated SearchResult results = 2;
+  int32 timestamp = 3;
+}
+
+// ========================================
+// Servicio 6: Envío de mensajes (Lamport)
 // ========================================
 service MessageService {
   rpc SendMessage(MessageRequest) returns (MessageResponse);
@@ -86,7 +128,7 @@ message MessageResponse {
 }
 
 // ========================================
-// Servicio 5: Broadcast (difusión)
+// Servicio 7: Broadcast (difusión)
 // ========================================
 service BroadcastService {
   rpc BroadcastMessage(BroadcastRequest) returns (BroadcastResponse);

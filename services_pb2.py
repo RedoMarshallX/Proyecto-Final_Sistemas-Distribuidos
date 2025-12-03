@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0eservices.proto\x12\x12\x64istributed_system\"O\n\x0bMathRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x0c\n\x04num1\x18\x02 \x01(\x01\x12\x0c\n\x04num2\x18\x03 \x01(\x01\x12\x11\n\ttimestamp\x18\x04 \x01(\x05\"A\n\x0cMathResponse\x12\x0e\n\x06result\x18\x01 \x01(\x01\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\x12\x0e\n\x06status\x18\x03 \x01(\t\"6\n\x0e\x41verageRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"F\n\x0f\x41verageResponse\x12\x0f\n\x07numbers\x18\x01 \x03(\x01\x12\x0f\n\x07\x61verage\x18\x02 \x01(\x01\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\"\x1b\n\tMatrix2x2\x12\x0e\n\x06values\x18\x01 \x03(\x01\"5\n\rMatrixRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"\xb4\x01\n\x0eMatrixResponse\x12/\n\x08matrix_a\x18\x01 \x01(\x0b\x32\x1d.distributed_system.Matrix2x2\x12/\n\x08matrix_b\x18\x02 \x01(\x0b\x32\x1d.distributed_system.Matrix2x2\x12-\n\x06result\x18\x03 \x01(\x0b\x32\x1d.distributed_system.Matrix2x2\x12\x11\n\ttimestamp\x18\x04 \x01(\x05\"\\\n\x0eMessageRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x13\n\x0breceiver_id\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x05\"4\n\x0fMessageResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"I\n\x10\x42roadcastRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\"L\n\x11\x42roadcastResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65livered_to\x18\x02 \x03(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\x32\xc2\x02\n\x0bMathService\x12H\n\x03\x41\x64\x64\x12\x1f.distributed_system.MathRequest\x1a .distributed_system.MathResponse\x12M\n\x08Subtract\x12\x1f.distributed_system.MathRequest\x1a .distributed_system.MathResponse\x12M\n\x08Multiply\x12\x1f.distributed_system.MathRequest\x1a .distributed_system.MathResponse\x12K\n\x06\x44ivide\x12\x1f.distributed_system.MathRequest\x1a .distributed_system.MathResponse2m\n\x0e\x41verageService\x12[\n\x10\x43\x61lculateAverage\x12\".distributed_system.AverageRequest\x1a#.distributed_system.AverageResponse2j\n\rMatrixService\x12Y\n\x10MultiplyMatrices\x12!.distributed_system.MatrixRequest\x1a\".distributed_system.MatrixResponse2h\n\x0eMessageService\x12V\n\x0bSendMessage\x12\".distributed_system.MessageRequest\x1a#.distributed_system.MessageResponse2s\n\x10\x42roadcastService\x12_\n\x10\x42roadcastMessage\x12$.distributed_system.BroadcastRequest\x1a%.distributed_system.BroadcastResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0eservices.proto\x12\x12\x64istributed_system\"O\n\x0bMathRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x0c\n\x04num1\x18\x02 \x01(\x01\x12\x0c\n\x04num2\x18\x03 \x01(\x01\x12\x11\n\ttimestamp\x18\x04 \x01(\x05\"A\n\x0cMathResponse\x12\x0e\n\x06result\x18\x01 \x01(\x01\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\x12\x0e\n\x06status\x18\x03 \x01(\t\"6\n\x0e\x41verageRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"F\n\x0f\x41verageResponse\x12\x0f\n\x07numbers\x18\x01 \x03(\x01\x12\x0f\n\x07\x61verage\x18\x02 \x01(\x01\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\"\x1b\n\tMatrix2x2\x12\x0e\n\x06values\x18\x01 \x03(\x01\"5\n\rMatrixRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"\xb4\x01\n\x0eMatrixResponse\x12/\n\x08matrix_a\x18\x01 \x01(\x0b\x32\x1d.distributed_system.Matrix2x2\x12/\n\x08matrix_b\x18\x02 \x01(\x0b\x32\x1d.distributed_system.Matrix2x2\x12-\n\x06result\x18\x03 \x01(\x0b\x32\x1d.distributed_system.Matrix2x2\x12\x11\n\ttimestamp\x18\x04 \x01(\x05\"3\n\x0bSortRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"S\n\x0cSortResponse\x12\x18\n\x10original_numbers\x18\x01 \x03(\x05\x12\x16\n\x0esorted_numbers\x18\x02 \x03(\x05\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\"5\n\rSearchRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\">\n\x0cSearchResult\x12\r\n\x05value\x18\x01 \x01(\x05\x12\x10\n\x08position\x18\x02 \x01(\x05\x12\r\n\x05\x66ound\x18\x03 \x01(\x08\"g\n\x0eSearchResponse\x12\x0f\n\x07numbers\x18\x01 \x03(\x05\x12\x31\n\x07results\x18\x02 \x03(\x0b\x32 .distributed_system.SearchResult\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\"\\\n\x0eMessageRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x13\n\x0breceiver_id\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x05\"4\n\x0fMessageResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"I\n\x10\x42roadcastRequest\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\"L\n\x11\x42roadcastResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65livered_to\x18\x02 \x03(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\x32\xc2\x02\n\x0bMathService\x12H\n\x03\x41\x64\x64\x12\x1f.distributed_system.MathRequest\x1a .distributed_system.MathResponse\x12M\n\x08Subtract\x12\x1f.distributed_system.MathRequest\x1a .distributed_system.MathResponse\x12M\n\x08Multiply\x12\x1f.distributed_system.MathRequest\x1a .distributed_system.MathResponse\x12K\n\x06\x44ivide\x12\x1f.distributed_system.MathRequest\x1a .distributed_system.MathResponse2m\n\x0e\x41verageService\x12[\n\x10\x43\x61lculateAverage\x12\".distributed_system.AverageRequest\x1a#.distributed_system.AverageResponse2j\n\rMatrixService\x12Y\n\x10MultiplyMatrices\x12!.distributed_system.MatrixRequest\x1a\".distributed_system.MatrixResponse2]\n\x0bSortService\x12N\n\tQuickSort\x12\x1f.distributed_system.SortRequest\x1a .distributed_system.SortResponse2f\n\rSearchService\x12U\n\x0cLinearSearch\x12!.distributed_system.SearchRequest\x1a\".distributed_system.SearchResponse2h\n\x0eMessageService\x12V\n\x0bSendMessage\x12\".distributed_system.MessageRequest\x1a#.distributed_system.MessageResponse2s\n\x10\x42roadcastService\x12_\n\x10\x42roadcastMessage\x12$.distributed_system.BroadcastRequest\x1a%.distributed_system.BroadcastResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -45,22 +45,36 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_MATRIXREQUEST']._serialized_end=396
   _globals['_MATRIXRESPONSE']._serialized_start=399
   _globals['_MATRIXRESPONSE']._serialized_end=579
-  _globals['_MESSAGEREQUEST']._serialized_start=581
-  _globals['_MESSAGEREQUEST']._serialized_end=673
-  _globals['_MESSAGERESPONSE']._serialized_start=675
-  _globals['_MESSAGERESPONSE']._serialized_end=727
-  _globals['_BROADCASTREQUEST']._serialized_start=729
-  _globals['_BROADCASTREQUEST']._serialized_end=802
-  _globals['_BROADCASTRESPONSE']._serialized_start=804
-  _globals['_BROADCASTRESPONSE']._serialized_end=880
-  _globals['_MATHSERVICE']._serialized_start=883
-  _globals['_MATHSERVICE']._serialized_end=1205
-  _globals['_AVERAGESERVICE']._serialized_start=1207
-  _globals['_AVERAGESERVICE']._serialized_end=1316
-  _globals['_MATRIXSERVICE']._serialized_start=1318
-  _globals['_MATRIXSERVICE']._serialized_end=1424
-  _globals['_MESSAGESERVICE']._serialized_start=1426
-  _globals['_MESSAGESERVICE']._serialized_end=1530
-  _globals['_BROADCASTSERVICE']._serialized_start=1532
-  _globals['_BROADCASTSERVICE']._serialized_end=1647
+  _globals['_SORTREQUEST']._serialized_start=581
+  _globals['_SORTREQUEST']._serialized_end=632
+  _globals['_SORTRESPONSE']._serialized_start=634
+  _globals['_SORTRESPONSE']._serialized_end=717
+  _globals['_SEARCHREQUEST']._serialized_start=719
+  _globals['_SEARCHREQUEST']._serialized_end=772
+  _globals['_SEARCHRESULT']._serialized_start=774
+  _globals['_SEARCHRESULT']._serialized_end=836
+  _globals['_SEARCHRESPONSE']._serialized_start=838
+  _globals['_SEARCHRESPONSE']._serialized_end=941
+  _globals['_MESSAGEREQUEST']._serialized_start=943
+  _globals['_MESSAGEREQUEST']._serialized_end=1035
+  _globals['_MESSAGERESPONSE']._serialized_start=1037
+  _globals['_MESSAGERESPONSE']._serialized_end=1089
+  _globals['_BROADCASTREQUEST']._serialized_start=1091
+  _globals['_BROADCASTREQUEST']._serialized_end=1164
+  _globals['_BROADCASTRESPONSE']._serialized_start=1166
+  _globals['_BROADCASTRESPONSE']._serialized_end=1242
+  _globals['_MATHSERVICE']._serialized_start=1245
+  _globals['_MATHSERVICE']._serialized_end=1567
+  _globals['_AVERAGESERVICE']._serialized_start=1569
+  _globals['_AVERAGESERVICE']._serialized_end=1678
+  _globals['_MATRIXSERVICE']._serialized_start=1680
+  _globals['_MATRIXSERVICE']._serialized_end=1786
+  _globals['_SORTSERVICE']._serialized_start=1788
+  _globals['_SORTSERVICE']._serialized_end=1881
+  _globals['_SEARCHSERVICE']._serialized_start=1883
+  _globals['_SEARCHSERVICE']._serialized_end=1985
+  _globals['_MESSAGESERVICE']._serialized_start=1987
+  _globals['_MESSAGESERVICE']._serialized_end=2091
+  _globals['_BROADCASTSERVICE']._serialized_start=2093
+  _globals['_BROADCASTSERVICE']._serialized_end=2208
 # @@protoc_insertion_point(module_scope)
