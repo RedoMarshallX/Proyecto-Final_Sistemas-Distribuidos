@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # Proceso 1: Operaciones Matemáticas
+  proceso1:
+    build: .
+    container_name: proceso1_matematicas
+    hostname: proceso1
+    volumes:
+      - ./proceso1_matematicas_v2.py:/app/proceso.py:ro
+    ports:
+      - "50051:50051"
+    command: python -u proceso.py
+    networks:
+      - sistema_distribuido
+    restart: unless-stopped
+
+  # Proceso 2: Cálculo de Promedio
+  proceso2:
+    build: .
+    container_name: proceso2_promedio
+    hostname: proceso2
+    volumes:
+      - ./proceso2_promedio_v2.py:/app/proceso.py:ro
+    ports:
+      - "50052:50052"
+    command: python -u proceso.py
+    networks:
+      - sistema_distribuido
+    restart: unless-stopped
+    depends_on:
+      - proceso1
+
+  # Proceso 3: Multiplicación de Matrices
+  proceso3:
+    build: .
+    container_name: proceso3_matrices
+    hostname: proceso3
+    volumes:
+      - ./proceso3_matrices_v2.py:/app/proceso.py:ro
+    ports:
+      - "50053:50053"
+    command: python -u proceso.py
+    networks:
+      - sistema_distribuido
+    restart: unless-stopped
+    depends_on:
+      - proceso1
+
+  # Proceso 4: Ordenamiento Quick Sort
+  proceso4:
+    build: .
+    container_name: proceso4_quicksort
+    hostname: proceso4
+    volumes:
+      - ./proceso4_quicksort_v2.py:/app/proceso.py:ro
+    ports:
+      - "50054:50054"
+    command: python -u proceso.py
+    networks:
+      - sistema_distribuido
+    restart: unless-stopped
+    depends_on:
+      - proceso2
+
+  # Proceso 5: Búsqueda Lineal
+  proceso5:
+    build: .
+    container_name: proceso5_busqueda
+    hostname: proceso5
+    volumes:
+      - ./proceso5_busqueda_v2.py:/app/proceso.py:ro
+    ports:
+      - "50055:50055"
+    command: python -u proceso.py
+    networks:
+      - sistema_distribuido
+    restart: unless-stopped
+    depends_on:
+      - proceso3
+
+networks:
+  sistema_distribuido:
+    driver: bridge
