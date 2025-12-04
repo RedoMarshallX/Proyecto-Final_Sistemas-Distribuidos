@@ -1,7 +1,7 @@
 """
 PROCESO 2: SERVICIO DE CÁLCULO DE PROMEDIO (CON COMUNICACIÓN)
 Este proceso:
-1. Evento interno: calcular factorial(8)
+1. Evento interno: Promedio de 50 números aleatorios en un rango de 0 a 10
 2. Envía mensaje a P1
 3. Recibe mensaje de P4
 """
@@ -118,17 +118,18 @@ def enviar_mensaje_a_proceso(id_origen, id_destino, mensaje, timestamp, host, pu
 def tarea_proceso2(id_proceso, reloj):
     """
     Tarea específica del Proceso 2:
-    1. Evento interno: calcular factorial(8)
+    1. Evento interno: Promedio de 50 números aleatorios en un rango de 0 a 10
     2. Envía mensaje a P1
     3. Recibe mensaje de P4 (el servidor lo recibe automáticamente)
     """
     time.sleep(4)
     
-    # 1. EVENTO INTERNO: Calcular factorial(8)
+    # 1. EVENTO INTERNO: Promedio de 50 números aleatorios (0 a 10)
     reloj.incrementar()
-    factorial = math.factorial(8)
+    numeros = [random.uniform(0, 10) for _ in range(50)]
+    promedio = sum(numeros) / len(numeros)
     Bitacora.registrar("INTERNAL", 
-                      f"{id_proceso} calculó factorial(8) = {factorial}",
+                      f"{id_proceso} calculó promedio de 50 números (0-10) = {promedio:.4f}",
                       reloj.obtener_tiempo())
     
     time.sleep(1)
@@ -136,12 +137,12 @@ def tarea_proceso2(id_proceso, reloj):
     # 2. ENVIAR MENSAJE A P1
     reloj.incrementar()
     Bitacora.registrar("SEND", 
-                      f"{id_proceso} -> P1_MATH mensaje='Hola P1, factorial: {factorial}'",
+                      f"{id_proceso} -> P1_MATH mensaje='Hola P1, promedio: {promedio:.4f}'",
                       reloj.obtener_tiempo())
     
     timestamp_recibido = enviar_mensaje_a_proceso(
         id_proceso, "P1_MATH", 
-        f"Hola P1, factorial: {factorial}",
+        f"Hola P1, promedio: {promedio:.4f}",
         reloj.obtener_tiempo(),
         "proceso1", 50051
     )
@@ -169,7 +170,7 @@ def iniciar_servidor():
     servidor.add_insecure_port('[::]:50052')
     servidor.start()
     
-    print(f"✓ {id_proceso} servidor iniciado en puerto 50052")
+    print(f"{id_proceso} servidor iniciado en puerto 50052")
     Bitacora.registrar("INTERNAL", f"{id_proceso} inicializado", reloj.obtener_tiempo())
     
     threading.Thread(target=tarea_proceso2, args=(id_proceso, reloj), daemon=True).start()

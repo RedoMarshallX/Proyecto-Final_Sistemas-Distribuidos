@@ -2,7 +2,7 @@
 PROCESO 3: SERVICIO DE MULTIPLICACIÓN DE MATRICES (CON COMUNICACIÓN)
 Este proceso:
 1. Recibe mensaje de P1
-2. Evento interno: multiplicar matrices 2×2
+2. Evento interno: Matriz resultante del producto de 2 matrices de 2×2 con números aleatorios (0 a 10)
 3. Envía mensaje a P5
 """
 
@@ -138,7 +138,7 @@ def tarea_proceso3(id_proceso, reloj, evento_recibido):
     """
     Tarea específica del Proceso 3:
     1. Recibe mensaje de P1 (espera)
-    2. Evento interno: multiplicar matrices 2×2
+    2. Evento interno: Matriz resultante del producto de 2 matrices de 2×2 con números aleatorios (0 a 10)
     3. Envía mensaje a P5
     """
     # 1. ESPERAR MENSAJE DE P1
@@ -147,13 +147,13 @@ def tarea_proceso3(id_proceso, reloj, evento_recibido):
     
     time.sleep(1)
     
-    # 2. EVENTO INTERNO: Multiplicar matrices
+    # 2. EVENTO INTERNO: Multiplicar matrices 2x2 con números aleatorios (0-10)
     reloj.incrementar()
-    # Generar matrices para el ejemplo
+    # Generar matrices con números aleatorios de 0 a 10
     matriz_a = [random.uniform(0, 10) for _ in range(4)]
     matriz_b = [random.uniform(0, 10) for _ in range(4)]
     
-    # Multiplicar
+    # Multiplicar matrices 2x2
     a00, a01, a10, a11 = matriz_a
     b00, b01, b10, b11 = matriz_b
     resultado = [
@@ -164,7 +164,7 @@ def tarea_proceso3(id_proceso, reloj, evento_recibido):
     ]
     
     Bitacora.registrar("INTERNAL", 
-                      f"{id_proceso} multiplicó matrices 2x2 internamente",
+                      f"{id_proceso} multiplicó matrices 2x2 (valores 0-10), resultado=[{resultado[0]:.2f}, {resultado[1]:.2f}, {resultado[2]:.2f}, {resultado[3]:.2f}]",
                       reloj.obtener_tiempo())
     
     time.sleep(1)
@@ -203,7 +203,7 @@ def iniciar_servidor():
     servidor.add_insecure_port('[::]:50053')
     servidor.start()
     
-    print(f"✓ {id_proceso} servidor iniciado en puerto 50053")
+    print(f"{id_proceso} servidor iniciado en puerto 50053")
     Bitacora.registrar("INTERNAL", f"{id_proceso} inicializado", reloj.obtener_tiempo())
     
     threading.Thread(target=tarea_proceso3, args=(id_proceso, reloj, evento_recibido), daemon=True).start()

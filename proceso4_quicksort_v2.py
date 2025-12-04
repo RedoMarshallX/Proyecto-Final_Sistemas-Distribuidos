@@ -1,7 +1,7 @@
 """
 PROCESO 4: SERVICIO DE ORDENAMIENTO QUICK SORT (CON COMUNICACIÓN)
 Este proceso:
-1. Evento interno: contar del 1 al 1000
+1. Evento interno: Ordenar 100 números aleatorios (0 a 100) usando Quick Sort
 2. Envía mensaje a P2
 3. Recibe mensaje de P5
 """
@@ -128,20 +128,30 @@ def enviar_mensaje_a_proceso(id_origen, id_destino, mensaje, timestamp, host, pu
 def tarea_proceso4(id_proceso, reloj):
     """
     Tarea específica del Proceso 4:
-    1. Evento interno: contar del 1 al 1000
+    1. Evento interno: Ordenar 100 números aleatorios (0 a 100) usando Quick Sort
     2. Envía mensaje a P2
     3. Recibe mensaje de P5 (el servidor lo recibe automáticamente)
     """
     time.sleep(5)
     
-    # 1. EVENTO INTERNO: Contar del 1 al 1000
+    # 1. EVENTO INTERNO: Ordenar 100 números aleatorios (0-100) con Quick Sort
     reloj.incrementar()
-    cuenta = 0
-    for i in range(1, 1001):
-        cuenta += 1
+    numeros = [random.randint(0, 100) for _ in range(100)]
+    
+    # Función Quick Sort interna
+    def quick_sort_local(arr):
+        if len(arr) <= 1:
+            return arr
+        pivote = arr[len(arr) // 2]
+        menores = [x for x in arr if x < pivote]
+        iguales = [x for x in arr if x == pivote]
+        mayores = [x for x in arr if x > pivote]
+        return quick_sort_local(menores) + iguales + quick_sort_local(mayores)
+    
+    numeros_ordenados = quick_sort_local(numeros.copy())
     
     Bitacora.registrar("INTERNAL", 
-                      f"{id_proceso} contó del 1 al 1000, total={cuenta}",
+                      f"{id_proceso} ordenó 100 números (0-100) con Quick Sort, primeros 5: {numeros_ordenados[:5]}, últimos 5: {numeros_ordenados[-5:]}",
                       reloj.obtener_tiempo())
     
     time.sleep(1)
@@ -149,12 +159,12 @@ def tarea_proceso4(id_proceso, reloj):
     # 2. ENVIAR MENSAJE A P2
     reloj.incrementar()
     Bitacora.registrar("SEND", 
-                      f"{id_proceso} -> P2_AVG mensaje='Hola P2, conté hasta: {cuenta}'",
+                      f"{id_proceso} -> P2_AVG mensaje='Hola P2, ordenamiento completado'",
                       reloj.obtener_tiempo())
     
     timestamp_recibido = enviar_mensaje_a_proceso(
         id_proceso, "P2_AVG", 
-        f"Hola P2, conté hasta: {cuenta}",
+        f"Hola P2, ordenamiento completado: {len(numeros_ordenados)} números",
         reloj.obtener_tiempo(),
         "proceso2", 50052
     )
@@ -182,7 +192,7 @@ def iniciar_servidor():
     servidor.add_insecure_port('[::]:50054')
     servidor.start()
     
-    print(f"✓ {id_proceso} servidor iniciado en puerto 50054")
+    print(f"{id_proceso} servidor iniciado en puerto 50054")
     Bitacora.registrar("INTERNAL", f"{id_proceso} inicializado", reloj.obtener_tiempo())
     
     threading.Thread(target=tarea_proceso4, args=(id_proceso, reloj), daemon=True).start()

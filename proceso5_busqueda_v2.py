@@ -2,7 +2,7 @@
 PROCESO 5: SERVICIO DE BÚSQUEDA LINEAL (CON COMUNICACIÓN)
 Este proceso:
 1. Recibe mensaje de P3
-2. Evento interno: promedio de 50 números aleatorios
+2. Evento interno: Encontrar los números "3, 22 y 50" de 200 números aleatorios (0 a 100) usando búsqueda lineal
 3. Envía mensaje a P4
 """
 
@@ -142,7 +142,7 @@ def tarea_proceso5(id_proceso, reloj, evento_recibido):
     """
     Tarea específica del Proceso 5:
     1. Recibe mensaje de P3 (espera)
-    2. Evento interno: promedio de 50 números aleatorios
+    2. Evento interno: Encontrar los números "3, 22 y 50" de 200 números aleatorios (0 a 100) usando búsqueda lineal
     3. Envía mensaje a P4
     """
     # 1. ESPERAR MENSAJE DE P3
@@ -151,13 +151,24 @@ def tarea_proceso5(id_proceso, reloj, evento_recibido):
     
     time.sleep(1)
     
-    # 2. EVENTO INTERNO: Promedio de 50 números
+    # 2. EVENTO INTERNO: Búsqueda lineal de 3, 22 y 50 en 200 números (0-100)
     reloj.incrementar()
-    numeros = [random.uniform(0, 10) for _ in range(50)]
-    promedio = sum(numeros) / len(numeros)
+    numeros = [random.randint(0, 100) for _ in range(200)]
+    objetivos = [3, 22, 50]
+    
+    # Búsqueda lineal
+    resultados = []
+    for objetivo in objetivos:
+        posicion = -1
+        for i, valor in enumerate(numeros):
+            if valor == objetivo:
+                posicion = i
+                break
+        encontrado = "ENCONTRADO" if posicion != -1 else "NO ENCONTRADO"
+        resultados.append(f"{objetivo}:{encontrado}(pos={posicion})" if posicion != -1 else f"{objetivo}:{encontrado}")
     
     Bitacora.registrar("INTERNAL", 
-                      f"{id_proceso} calculó promedio de 50 números = {promedio:.4f}",
+                      f"{id_proceso} buscó [3, 22, 50] en 200 números (0-100) con búsqueda lineal: {', '.join(resultados)}",
                       reloj.obtener_tiempo())
     
     time.sleep(1)
@@ -165,12 +176,12 @@ def tarea_proceso5(id_proceso, reloj, evento_recibido):
     # 3. ENVIAR MENSAJE A P4
     reloj.incrementar()
     Bitacora.registrar("SEND", 
-                      f"{id_proceso} -> P4_SORT mensaje='Hola P4, promedio: {promedio:.4f}'",
+                      f"{id_proceso} -> P4_SORT mensaje='Hola P4, búsqueda completada'",
                       reloj.obtener_tiempo())
     
     timestamp_recibido = enviar_mensaje_a_proceso(
         id_proceso, "P4_SORT", 
-        f"Hola P4, promedio: {promedio:.4f}",
+        f"Hola P4, búsqueda completada",
         reloj.obtener_tiempo(),
         "proceso4", 50054
     )
@@ -196,7 +207,7 @@ def iniciar_servidor():
     servidor.add_insecure_port('[::]:50055')
     servidor.start()
     
-    print(f"✓ {id_proceso} servidor iniciado en puerto 50055")
+    print(f"{id_proceso} servidor iniciado en puerto 50055")
     Bitacora.registrar("INTERNAL", f"{id_proceso} inicializado", reloj.obtener_tiempo())
     
     threading.Thread(target=tarea_proceso5, args=(id_proceso, reloj, evento_recibido), daemon=True).start()

@@ -1,7 +1,7 @@
 """
 PROCESO 1: SERVICIO DE OPERACIONES MATEMÁTICAS (CON COMUNICACIÓN)
 Este proceso:
-1. Evento interno: calcular suma del 1 al 200
+1. Evento interno: Operaciones matemáticas
 2. Envía mensaje a P3
 3. Evento interno: generar número aleatorio
 """
@@ -173,18 +173,23 @@ def enviar_mensaje_a_proceso(id_origen, id_destino, mensaje, timestamp, host, pu
 def tarea_proceso1(id_proceso, reloj):
     """
     Tarea específica del Proceso 1:
-    1. Evento interno: calcular suma del 1 al 200
+    1. Evento interno: Calcular suma, resta, multiplicación y división de 2 números
     2. Envía mensaje a P3
     3. Evento interno: generar número aleatorio
     """
     # Esperar a que el servidor esté listo
     time.sleep(3)
     
-    # 1. EVENTO INTERNO: Calcular suma del 1 al 200
+    # 1. EVENTO INTERNO: Operaciones matemáticas con 2 números
     reloj.incrementar()
-    suma = sum(range(1, 201))
+    num1 = 25.5
+    num2 = 10.3
+    suma = num1 + num2
+    resta = num1 - num2
+    multiplicacion = num1 * num2
+    division = num1 / num2
     Bitacora.registrar("INTERNAL", 
-                      f"{id_proceso} calculó suma(1..200) = {suma}",
+                      f"{id_proceso} operaciones: {num1}+{num2}={suma:.2f}, {num1}-{num2}={resta:.2f}, {num1}*{num2}={multiplicacion:.2f}, {num1}/{num2}={division:.2f}",
                       reloj.obtener_tiempo())
     
     time.sleep(1)
@@ -192,12 +197,12 @@ def tarea_proceso1(id_proceso, reloj):
     # 2. ENVIAR MENSAJE A P3
     reloj.incrementar()
     Bitacora.registrar("SEND", 
-                      f"{id_proceso} -> P3_MATRIX mensaje='Hola P3, suma calculada: {suma}'",
+                      f"{id_proceso} -> P3_MATRIX mensaje='Hola P3, operaciones completadas'",
                       reloj.obtener_tiempo())
     
     timestamp_recibido = enviar_mensaje_a_proceso(
         id_proceso, "P3_MATRIX", 
-        f"Hola P3, suma calculada: {suma}",
+        f"Hola P3, operaciones completadas: suma={suma:.2f}",
         reloj.obtener_tiempo(),
         "proceso3", 50053  # En Docker: hostname proceso3
     )
@@ -235,7 +240,7 @@ def iniciar_servidor():
     servidor.add_insecure_port('[::]:50051')
     servidor.start()
     
-    print(f"✓ {id_proceso} servidor iniciado en puerto 50051")
+    print(f"{id_proceso} servidor iniciado en puerto 50051")
     Bitacora.registrar("INTERNAL", f"{id_proceso} inicializado", reloj.obtener_tiempo())
     
     # Iniciar tarea de comunicación en un hilo separado
